@@ -624,7 +624,7 @@ function Navbar({active,go}) {
 }
 
 /* ─── PROJECT CARD ───────────────────────────────────────── */
-function ProjectCard({emoji,title,subtitle,date,desc,tech,live,color,delay}) {
+function ProjectCard({emoji,title,subtitle,date,desc,tech,live,color,delay,repo}) {
   const [flip,setFlip]=useState(false);
   const ref=useRef(null);
   const inView=useInView(ref,{once:true,margin:"-60px"});
@@ -632,7 +632,7 @@ function ProjectCard({emoji,title,subtitle,date,desc,tech,live,color,delay}) {
     <motion.div ref={ref}
       initial={{opacity:0,y:60}} animate={inView?{opacity:1,y:0}:{}}
       transition={{duration:.9,ease:[.16,1,.3,1],delay}}
-      style={{perspective:1100,height:400,cursor:"pointer"}}
+      style={{perspective:1100,height:400,cursor:"pointer" ,backgroundImage:"https://tse4.mm.bing.net/th/id/OIP.rWR-uAUTI2Es1uZKtvMgmQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3", backgroundSize:"cover",backgroundPosition:"center",}}
       onClick={()=>setFlip(f=>!f)}>
       <motion.div animate={{rotateY:flip?180:0}} transition={{duration:.72,ease:[.16,1,.3,1]}}
         style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d"}}>
@@ -684,14 +684,15 @@ function ProjectCard({emoji,title,subtitle,date,desc,tech,live,color,delay}) {
           <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.textSub,
             textAlign:"center",lineHeight:1.78,marginBottom:24}}>{desc}</p>
           <div style={{display:"flex",gap:10,flexWrap:"wrap",justifyContent:"center"}}>
-            {[{l:"Live Demo →",href:live,filled:true},{l:"GitHub",href:"#",filled:false}].map(b=>(
+            {[{l:"Live Demo →",href:live,filled:true},{l:"GitHub",href:repo,filled:true}].map(b=>(
               <motion.a key={b.l} href={b.href} target="_blank"
                 whileHover={{scale:1.06,y:-2}} whileTap={{scale:.95}}
                 onClick={e=>e.stopPropagation()} data-mag
                 style={{fontFamily:"'DM Sans',sans-serif",fontWeight:600,fontSize:13,
                   padding:"10px 22px",borderRadius:8,
+
                   border:`1.5px solid ${b.filled?color:"rgba(255,255,255,0.18)"}`,
-                  background:b.filled?color:"rgba(255,255,255,0.05)",
+                   background:b.filled?color:"rgba(255,255,255,0.05)",
                   color:b.filled?C.bg:C.text}}>
                 {b.l}
               </motion.a>
@@ -1016,12 +1017,18 @@ export default function Portfolio() {
         <div className="wrap">
           <Title eyebrow="Things I've Built" title="Projects" color={C.gold}/>
           <div className="pg" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:24}}>
-            <ProjectCard emoji="📚" title="Kitabi" subtitle="Full-Stack Digital Library" date="Oct 2025"
-              desc="A full-stack web app for book sharing & discovery. Secure user authentication, dynamic content rendering, and real-time Firestore updates. Deployed on Netlify."
-              tech={["ReactJS","Firebase","Firestore"]} live="https://kitabokiduniya.netlify.app" color={C.teal} delay={0}/>
-            <ProjectCard emoji="🌐" title="Mini-Media" subtitle="Social Platform Prototype" date="Mar 2025"
+            <ProjectCard emoji="💬💻" title="ChatHere" subtitle="Full-Stack Digital chat rooms" date="feb 2026"
+              desc="A full-stack web app for chat system. user can join and  create group."
+              tech={["ReactJS","SpringBoot","MongoDB"]} live="#" repo="https://github.com/rohitkjaiswal/chat-app" color={C.teal} delay={0}/>
+              <ProjectCard emoji="📚" title="Kitabi" subtitle="An online book library" date="march 2025"
+              desc="A full-stack web app for chat system. user can join and  create group."
+              tech={["ReactJS","firebase","firestore"]} live="https://kitabokiduniya.netlify.app" repo="https://github.com/rohitkjaiswal/kitabokiduniya" color={C.teal} delay={0}/>
+            <ProjectCard emoji="👑" title="Coder-king" subtitle="Online contest and free resources" date="Dec 2025"
+              desc="User friendly interface with ReactJS & SpringBoot backend. User login, contest creation, and session persistence. Focused on modular components and responsive layout."
+              tech={["ReactJS","Firebase","CSS"]} live="https://coderking-ruddy.vercel.app/" repo="https://github.com/rohitkjaiswal/coderking-frontend" color={C.gold} delay={.16}/>
+               <ProjectCard emoji="🌐" title="Mini-Media" subtitle="Social Platform Prototype" date="Oct 2025"
               desc="Social media interface with ReactJS & Firebase backend. User login, post creation, and session persistence. Focused on modular components and responsive layout."
-              tech={["ReactJS","Firebase","CSS"]} live="https://mymini-media.netlify.app" color={C.gold} delay={.16}/>
+              tech={["ReactJS","Firebase","CSS"]} live="https://mymini-media.netlify.app" repo="https://github.com/rohitkjaiswal/mini-media-" color={C.gold} delay={.16}/>
           </div>
           <Reveal delay={.25} style={{marginTop:20,textAlign:"center"}}>
             <span style={{fontFamily:"'Caveat',cursive",fontSize:17,color:C.textDim}}>
